@@ -7,11 +7,12 @@ class Menu extends Component{
     {
         super(props);
         this.state={
-            selectedDish:null
+            selectedDish:null,
+            comment:null
         };
     };
     onDishSelect(dish){
-      this.setState({selectedDish:dish});
+      this.setState({selectedDish:dish,comment:dish.comments});
     }
     // renderdish(dish){
     //   if(dish!=null)
@@ -30,7 +31,9 @@ class Menu extends Component{
     //     return(<div></div>)
       
     // }
+    
     render(){
+        
         const menu = this.props.dishes.map((dish) => {
             return (
               <div className="col-12 col-md-5 m-1">
@@ -47,7 +50,14 @@ class Menu extends Component{
               </div>
             );
         });
-
+        
+        // const com=this.props.dishes.map((comment)=>{return(
+        //   <div>
+        //     <li key={comment.comments.id}>
+        //       {comment.comments.author}
+        //       {comment.comments.date}
+        //     </li>
+        //   </div>)})
         return (
             <div className="container">
               <div className="row">
@@ -57,7 +67,7 @@ class Menu extends Component{
               {/* { <div className="row">
               {this.renderdish(this.state.selectedDish)}
               </div> } */}
-              <DishDetail selectedDish={this.state.selectedDish}/>
+              <DishDetail selectedDish={this.state.selectedDish}  />
             </div>
           );
       }

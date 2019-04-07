@@ -19,13 +19,30 @@ class DishDetail extends Component{
             return(<div></div>)
           
         }
+        renderComment(commments)
+        {
+          if(commments!=null)
+          { 
+            const commentcomp=commments.map(comment=>{
+            return(<li key={comment.id}>
+                    <p>{comment.comment}</p>
+                    <p>--{comment.author}</p>
+                     </li>)
+          })
+          return(<div>{commentcomp}</div>)
+        }
+           
+            
+           
+        }
     render(){
         const dish=this.props.selectedDish;
+       
         return(
             <div className="col-12 col-md-5 m-1">
                {this.renderDish(dish)}
-
-
+               {this.renderComment(dish.comments)}
+               
             </div>
             
 
