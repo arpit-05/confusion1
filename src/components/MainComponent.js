@@ -4,6 +4,8 @@ import {Card,CardImg,CardImgOverlay,CardText,CardBody,CardTitle} from "reactstra
 import Menu from "./MenuComponent"
 import DishDetail from "./DishDetailComponent"
 import {DISHES} from "../shared/dishes"
+import Header from "./HeaderComponent"
+import Footer from "./FooterComponent";
 class Main extends Component{
     constructor(props)
     {
@@ -24,11 +26,13 @@ class Main extends Component{
         return (
             <div className="container">
               <div className="row">
+              <Header/>
                 <Menu dishes={this.state.dishes} onClick={(dishId)=>this.onDishSelect(dishId)}></Menu>
                     
               </div>
              
               <DishDetail dish={this.state.dishes.filter((dish) => dish.id===this.state.selectedDish)[0]} />
+              <Footer/>
               
             </div>
           );
