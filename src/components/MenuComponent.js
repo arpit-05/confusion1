@@ -1,75 +1,35 @@
 import  React,{Component} from "react"
-//import {Media} from 'reactstrap'
-import {Card,CardImg,CardImgOverlay,CardText,CardBody,CardTitle} from "reactstrap"
-import DishDetail from "./DishDetailComponent"
-class Menu extends Component{
-    constructor(props)
-    {
-        super(props);
-        this.state={
-            selectedDish:null,
-            comment:null
-        };
-    };
-    onDishSelect(dish){
-      this.setState({selectedDish:dish,comment:dish.comments});
-    }
-    // renderdish(dish){
-    //   if(dish!=null)
-    //     return(
-    //       <Card>
-    //         <CardImg top src={dish.image} alt={dish.name}/>
-    //         <CardBody>
-    //           <CardTitle>{dish.name}</CardTitle>
-    //           <CardText>{dish.description}</CardText>
-    //         </CardBody>
 
-    //       </Card>
-    //     );
-      
-    //   else
-    //     return(<div></div>)
-      
-    // }
+import {Card,CardImg,CardImgOverlay,CardText,CardBody,CardTitle} from "reactstrap"
+
+function RenderMenuItems ({dish,onClick}){
+return (
+  <Card
+      onClick={() => onClick(dish.id)}>
+      <CardImg width="100%" src={dish.image} alt={dish.name} />
+      <CardImgOverlay>
+          <CardTitle>{dish.name}</CardTitle>
+      </CardImgOverlay>
+  </Card>
+);
+    }
     
-    render(){
+    const Menu=(props)=>{const menu = props.dishes.map((dish) => {
+      return (
+        <div className="col-12 col-md-5 m-1" key={dish.id}>
+        <RenderMenuItems dish={dish} onClick={props.onClick}/>
+        </div>
+      );
+  });
+  return (
+    <div className="container">
+      <div className="row">
         
-        const menu = this.props.dishes.map((dish) => {
-            return (
-              <div className="col-12 col-md-5 m-1">
-              <Card key={dish.id} onClick={()=>this.onDishSelect(dish)}>
-                
-                  
-                      <CardImg width="100%" src={dish.image} alt={dish.name} />
-                  
-                  <CardImgOverlay>
-                    <CardTitle>{dish.name}</CardTitle>
-                    
-                  </CardImgOverlay>
-                </Card>
-              </div>
-            );
-        });
-        
-        // const com=this.props.dishes.map((comment)=>{return(
-        //   <div>
-        //     <li key={comment.comments.id}>
-        //       {comment.comments.author}
-        //       {comment.comments.date}
-        //     </li>
-        //   </div>)})
-        return (
-            <div className="container">
-              <div className="row">
-                
-                    {menu}
-              </div>
-              {/* { <div className="row">
-              {this.renderdish(this.state.selectedDish)}
-              </div> } */}
-              <DishDetail selectedDish={this.state.selectedDish}  />
-            </div>
-          );
-      }
+            {menu}
+      </div>
+    </div>
+  );
+
 }
+ 
 export default Menu;
