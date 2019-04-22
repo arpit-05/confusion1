@@ -26,7 +26,14 @@ import {Card,CardImg,CardTitle,CardText,CardBody} from "reactstrap"
             const commentcomp=comments.map(comment=>{
             return(<li key={comment.id}>
                     <p>{comment.comment}</p>
-                    <p>--{comment.author}</p>
+                    <p>--{comment.author}
+                    <br></br>
+                    &nbsp;
+                    {new Intl.DateTimeFormat('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: '2-digit'
+                        }).format(new Date(comment.date))}</p>
                      </li>)
           })
           return(<div>{commentcomp}</div>)
