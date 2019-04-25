@@ -1,15 +1,15 @@
 import  React,{Component} from "react"
+import {Link} from "react-router-dom"
+import {Card,CardImg,CardImgOverlay,CardText,CardBody,CardTitle,Breadcrumb,BreadcrumbItem} from "reactstrap"
 
-import {Card,CardImg,CardImgOverlay,CardText,CardBody,CardTitle} from "reactstrap"
-
-function RenderMenuItems ({dish,onClick}){
+function RenderMenuItems ({dish}){
 return (
-  <Card
-      onClick={() => onClick(dish.id)}>
+  <Card>
+      <Link to={`/menu/${dish.id}`}>
       <CardImg width="100%" src={dish.image} alt={dish.name} />
       <CardImgOverlay>
           <CardTitle>{dish.name}</CardTitle>
-      </CardImgOverlay>
+      </CardImgOverlay></Link>
   </Card>
 );
     }
@@ -24,7 +24,14 @@ return (
   return (
     <div className="container">
       <div className="row">
-        
+        <Breadcrumb>
+        <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+        <BreadcrumbItem active>Menu</BreadcrumbItem>
+        </Breadcrumb>
+        <div className="col-12">
+        <h3>Menu</h3>
+        <hr/>
+        </div>
             {menu}
       </div>
     </div>
